@@ -78,18 +78,6 @@ class foreman_proxy_content::dispatch_router (
       direction  => 'in',
       connection => 'broker',
     }
-
-    qpid::router::link_route { 'broker-qmf-route-in':
-      prefix     => 'qmf.',
-      connection => 'broker',
-      direction  => 'in',
-    }
-
-    qpid::router::link_route { 'broker-qmf-route-out':
-      prefix     => 'qmf.',
-      connection => 'broker',
-      direction  => 'out',
-    }
   } else {
     qpid::router::connector { 'hub':
       host         => $foreman_proxy_content::parent_fqdn,
@@ -106,16 +94,6 @@ class foreman_proxy_content::dispatch_router (
 
     qpid::router::link_route { 'hub-pulp-route-out':
       prefix    => 'pulp.',
-      direction => 'out',
-    }
-
-    qpid::router::link_route { 'hub-qmf-route-in':
-      prefix    => 'qmf.',
-      direction => 'in',
-    }
-
-    qpid::router::link_route { 'hub-qmf-route-out':
-      prefix    => 'qmf.',
       direction => 'out',
     }
   }
